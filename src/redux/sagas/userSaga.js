@@ -1,10 +1,10 @@
 import { all, delay, put, takeLatest, call } from 'redux-saga/effects';
 import * as constants from '../actionTypes'
+import {getUsersListApi} from '../apis/userApis'
 
 export function* getUserlistSaga() {
-    debugger
     try {
-        const userList = yield call('https://jsonplaceholder.typicode.com/users');
+        const userList = yield call(getUsersListApi);
         yield put({type: "GET_USER_LIST_SUCCESS", payload: userList});
     } catch (e) {
         yield put({type: "GET_USER_LIST_FAILURE", payload: e.message});
@@ -12,7 +12,5 @@ export function* getUserlistSaga() {
 }
 
 export default function* root() {
-  yield all([
-    takeLatest('GET_USER_LIST', getUserlistSaga)
-  ]);
+  yield takeLatest('GET_USER_LIST', getUserlistSaga)
 }

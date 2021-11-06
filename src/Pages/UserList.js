@@ -17,7 +17,11 @@ const Userlist = () => {
 
     return (
         <div >
-            User list
+            <h2> User list </h2>
+
+            {userList.map(user => (
+                <p> {user.name} </p>
+            ))}
         </div>
     );
 }
